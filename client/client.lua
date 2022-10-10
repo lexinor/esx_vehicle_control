@@ -15,6 +15,8 @@ RegisterNetEvent('esx_vehicles:parts', function(data)
         else
             RollUpWindow(cache.vehicle, data.id)
         end
+    elseif data.type == 'place' then
+        SetPedIntoVehicle(cache.ped, cache.vehicle, data.id)
     end
 
     lib.showContext(data.menu)
@@ -61,6 +63,10 @@ lib.registerContext({
             menu = 'doors_menu'
         },
         {
+            title = _U('seats'),
+            menu = 'place_menu'
+        },
+        {
             title = _U('windows'),
             menu = 'windows_menu'
         },
@@ -103,6 +109,37 @@ lib.registerContext({
                 arrow = true,
                 event = 'esx_vehicles:parts',
                 args = {value1 = 'rightrear', id = 3, type = 'doors', menu = 'doors_menu'}
+            },
+        }
+    },
+    {
+        id = 'place_menu',
+        title = _U('menu_title'),
+        menu = 'menu',
+        options = {
+            {
+                title = _U('driver'),
+                arrow = true,
+                event = 'esx_vehicles:parts',
+                args = {value1 = 'leftfront', id = -1, type = 'place', menu = 'place_menu'}
+            },
+            {
+                title = _U('passenger'),
+                arrow = true,
+                event = 'esx_vehicles:parts',
+                args = {value1 = 'rightfront', id = 0, type = 'place', menu = 'place_menu'}
+            },
+            {
+                title = _U('backdriver'),
+                arrow = true,
+                event = 'esx_vehicles:parts',
+                args = {value1 = 'leftrear', id = 1, type = 'place', menu = 'place_menu'}
+            },
+            {
+                title = _U('backpassenger'),
+                arrow = true,
+                event = 'esx_vehicles:parts',
+                args = {value1 = 'rightrear', id = 2, type = 'place', menu = 'place_menu'}
             },
         }
     },
